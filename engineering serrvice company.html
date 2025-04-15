@@ -1,38 +1,226 @@
+# Create the HTML content as a string
+html_content = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Engineering Services Company</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="R & R Title Services LLC offers secure and efficient title services with a focus on customer satisfaction and data privacy." />
+  <meta property="og:title" content="R & R Title Services LLC" />
+  <meta property="og:description" content="Offering secure and tech-enabled title services." />
+  <meta property="og:image" content="path_to_image" />
+  <meta property="og:url" content="https://your-website.com" />
+  <title>R & R Title Services LLC</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      color: #495057;
     }
+
+    /* Navbar */
+    nav {
+      background-color: #007bff;
+    }
+    nav .navbar-brand img {
+  height: 70px; /* You can tweak this */
+  margin-right: 10px;
+
+    }
+    nav .nav-link {
+      color: #ffffff;
+      transition: color 0.3s ease;
+    }
+    nav .nav-link:hover {
+      color: #f8f9fa;
+    }
+
+    /* Carousel */
     .carousel-item img {
-      height: 500px;
+      height: 350px; /* Reduced height */
       object-fit: cover;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
     }
+
+    .carousel-item.active img {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Service Section */
+    .card {
+      border: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
     .card img {
-      margin-bottom: 20px;
+      width: 50px;
+      height: 50px;
+      transition: transform 0.3s;
     }
-    footer {
+
+    .card img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Button Styling */
+    .btn-primary {
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      padding: 12px 30px;
+      font-weight: bold;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+
+    .btn-primary:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+    }
+
+    /* Sections */
+    section {
+      padding: 60px 0;
+    }
+
+    section h2 {
+      font-size: 2.5rem;
+      color: #007bff;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    /* About Section */
+    #about {
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      border-radius: 10px;
+      padding: 40px;
+    }
+
+    /* Testimonials */
+    #testimonials {
+      background-color: #f1f3f5;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #testimonials blockquote {
+      border-left: 5px solid #007bff;
+      padding-left: 20px;
+      font-style: italic;
+      font-size: 1.2rem;
+    }
+
+    /* Contact Section */
+    #contact {
       background: #f8f9fa;
-      padding: 20px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Footer */
+    footer {
+      background: #343a40;
+      color: #ffffff;
+      padding: 30px 0;
       text-align: center;
       font-size: 14px;
-      color: #666;
     }
+
+    footer a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Scroll to Top Button */
+    #goTopBtn {
+      display: none;
+      position: fixed;
+      bottom: 40px;
+      right: 30px;
+      z-index: 99;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      padding: 12px 18px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    #goTopBtn:hover {
+      background-color: #0056b3;
+    }
+
+    #visitorCount {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background: #343a40;
+      color: white;
+      padding: 10px 15px;
+      border-top-right-radius: 8px;
+      font-size: 14px;
+    }
+
+    /* Smooth Fade-In Animation */
     .fade-in {
       animation: fadeIn 2s ease-in;
     }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
+
+    /* Interactive Hover Effect */
     .interactive:hover {
       transform: scale(1.05);
       transition: transform 0.3s;
+    }
+
+    /* Animation for Images */
+    .image-animate {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .image-animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Input Focus Styles */
+    input:focus, textarea:focus {
+      border-color: #007bff;
+      box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.5);
+    }
+
+    /* Font Size Adjustments for Mobile */
+    @media (max-width: 768px) {
+      section h2 {
+        font-size: 2rem; /* smaller font size for mobile */
+      }
     }
   </style>
 </head>
@@ -41,15 +229,19 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">EngiServe</a>
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="images/fulllogo_transparent.png" alt="R & R Title Services LLC Logo">
+        R & R Title Services LLC
+      </a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
-          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Vendor Services</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
         </ul>
       </div>
@@ -57,117 +249,215 @@
   </nav>
 
   <!-- Carousel -->
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="https://images.unsplash.com/photo-1581091870622-2c51c7f9f3b4" class="d-block w-100" alt="Healthcare">
+        <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df" class="d-block w-100 image-animate" alt="Vendor" loading="lazy">
       </div>
       <div class="carousel-item">
-        <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620" class="d-block w-100" alt="Transport">
+        <img src="https://images.unsplash.com/photo-1542744095-291d1f67b221" class="d-block w-100 image-animate" alt="Supplier" loading="lazy">
       </div>
       <div class="carousel-item">
-        <img src="https://images.unsplash.com/photo-1598476472133-f0eebd66d5d7" class="d-block w-100" alt="Medical">
+        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3" class="d-block w-100 image-animate" alt="Logistics" loading="lazy">
       </div>
     </div>
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
 
   <!-- About Section -->
   <section id="about" class="py-5 text-center bg-light fade-in">
     <div class="container">
-      <h2>About Us</h2>
-      <p class="lead">We are a full-service engineering solutions company offering innovation-driven services to top industries worldwide, including healthcare, medical, and transportation sectors.</p>
+      <h2 class="mb-5">About Us</h2>
+      <div class="row text-start">
+        <div class="col-md-4 mb-4">
+          <h4 class="mb-3">Who We Are</h4>
+          <h6 class="text-primary mb-3">Customer assurance is our promise</h6>
+          <p>
+            Ryaan Tech Solutions Inc. is a full-service title company dedicated to working closely with buyers & sellers and their real estate professionals.
+          </p>
+          <p>
+            We offer bundled services for commercial & residential title searches and settlement coordination with a focus on tech-enabled security.
+          </p>
+          <p>
+            Our priority is safeguarding customer data while offering scalable and cost-effective solutions.
+          </p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h4 class="mb-3">What We Do</h4>
+          <p>We provide end-to-end solutions for procurement, logistics, and vendor performance management to help businesses streamline operations.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h4 class="mb-3">Why Choose Us</h4>
+          <h5>Customer Privacy & Data Accuracy</h5>
+          <p>
+            We strictly follow ALTA best practices to ensure your privacy and data integrity at every step. Partnering with us means you can rest easy knowing your title and document security are in expert hands.
+          </p>
+<h5>Tailored Solutions</h5>
+          <p>We adapt to market shifts such as real estate trends and regulatory changes to serve our clients effectively.</p>
+          <h5>Proven Experience</h5>
+          <p>
+            Trusted by major underwriters for over 6 years with a nationwide network of vetted professionals.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Services Section -->
+  <!-- Vendor Services Section -->
   <section id="services" class="py-5 fade-in">
     <div class="container">
-      <h2 class="text-center mb-5">Our Industry Services</h2>
+      <h2 class="text-center mb-5">Vendor Services</h2>
       <div class="row text-center">
-
         <div class="col-md-4">
           <div class="card shadow-sm border-0 h-100 interactive">
             <div class="card-body">
-              <img src="https://cdn-icons-png.flaticon.com/512/2965/2965567.png" alt="Healthcare" style="width:60px;">
-              <h5 class="card-title mt-3">Healthcare Engineering</h5>
-              <p class="card-text">Innovative solutions for medical devices, hospital infrastructure, and patient care technologies that improve lives.</p>
+              <img src="https://cdn-icons-png.flaticon.com/512/2920/2920319.png" alt="Procurement" class="image-animate">
+              <h5 class="card-title mt-3">Business Services & Support</h5>
+              <p class="card-text">Searching the electronic title plant databases along with Ground Abstracting Services for the current and prior owners [...]</p>
             </div>
           </div>
         </div>
-
         <div class="col-md-4 mt-4 mt-md-0">
           <div class="card shadow-sm border-0 h-100 interactive">
             <div class="card-body">
-              <img src="https://cdn-icons-png.flaticon.com/512/1995/1995476.png" alt="Transportation" style="width:60px;">
-              <h5 class="card-title mt-3">Transportation Systems</h5>
-              <p class="card-text">Smart and sustainable transport engineering for railways, roadways, and logistics — enhancing connectivity and safety.</p>
+              <img src="https://cdn-icons-png.flaticon.com/512/3079/3079181.png" alt="Inventory" class="image-animate">
+              <h5 class="card-title mt-3">Property Tax Solutions and Services</h5>
+              <p class="card-text">Calling to verify current and delinquent tax information on a property, Determine the current status of real estate taxes against [...]</p>
             </div>
           </div>
         </div>
-
         <div class="col-md-4 mt-4 mt-md-0">
           <div class="card shadow-sm border-0 h-100 interactive">
             <div class="card-body">
-              <img src="https://cdn-icons-png.flaticon.com/512/4351/4351522.png" alt="Medical" style="width:60px;">
-              <h5 class="card-title mt-3">Medical Technologies</h5>
-              <p class="card-text">Designing reliable medical technologies including analyzers, diagnostic devices, and lab systems used globally.</p>
+              <img src="https://cdn-icons-png.flaticon.com/512/1211/1211337.png" alt="Logistics" class="image-animate">
+              <h5 class="card-title mt-3">Settlement Services</h5>
+              <p class="card-text">Upon receipt of the borrower’s authorization, we will request payoff from the financial institution and track the turnaround time [...]</p>
             </div>
           </div>
         </div>
-
+        <div class="col-md-4 mt-4">
+          <div class="card shadow-sm border-0 h-100 interactive">
+            <div class="card-body">
+              <img src="https://cdn-icons-png.flaticon.com/512/1211/1211337.png" alt="Vendor Management" class="image-animate">
+              <h5 class="card-title mt-3">Vendor Management Services</h5>
+              <p class="card-text">Our vendor management operations provide consistent expert vendor execution, assurance of competitive pricing, quality, delivery and [...]</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mt-4">
+          <div class="card shadow-sm border-0 h-100 interactive">
+            <div class="card-body">
+              <img src="https://cdn-icons-png.flaticon.com/512/1211/1211337.png" alt="Add-ons" class="image-animate">
+              <h5 class="card-title mt-3">Miscellaneous add-on services</h5>
+              <p class="card-text">Default – First Lien Review Services, Redacting, Grading, etc. Pertinent pages or Full copy options of any requested [...]</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="py-5 bg-light fade-in">
-    <div class="container">
-      <h2 class="text-center mb-4">Client Testimonials</h2>
-      <div class="row">
-        <div class="col-md-6">
-          <blockquote class="blockquote">
-            <p>EngiServe delivered exactly what we needed — on time and beyond expectations! Their medical engineering insights are unmatched.</p>
-            <footer class="blockquote-footer">Dr. Amelia Hart, Meditech Labs</footer>
-          </blockquote>
-        </div>
-        <div class="col-md-6">
-          <blockquote class="blockquote">
-            <p>Working with EngiServe on our smart transport system was a game-changer. Their engineers think outside the box.</p>
-            <footer class="blockquote-footer">James Liu, TransMove Inc.</footer>
-          </blockquote>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-5 bg-light fade-in">
+  <section id="contact" class="py-5">
     <div class="container">
-      <h2 class="text-center mb-4">Contact Us</h2>
-      <form class="row g-3">
+      <h2 class="text-center mb-5">Contact Us</h2>
+      <div class="row">
         <div class="col-md-6">
-          <input type="text" class="form-control" placeholder="Your Name" required>
+          <form action="https://formsubmit.co/kvsskishorekumar@gmail.com" method="POST" enctype="text/plain">
+<!-- Hidden fields -->
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_subject" value="New Inquiry from Website Contact Form">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="_autoresponse" value="Thank you for reaching out! We'll get back to you soon.">
+            <div class="mb-3">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
         </div>
         <div class="col-md-6">
-          <input type="email" class="form-control" placeholder="Your Email" required>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=..."></iframe>
+          </div>
         </div>
-        <div class="col-12">
-          <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
-        </div>
-        <div class="col-12 text-center">
-          <button type="submit" class="btn btn-primary px-5 interactive">Send Message</button>
-        </div>
-      </form>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <div class="container">
-      <p>© 2025 EngiServe Solutions. All rights reserved.</p>
-    </div>
+    <p>&copy; 2025 R & R Title Services LLC | All Rights Reserved</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
   </footer>
+
+  <!-- Scroll to Top Button -->
+  <button id="goTopBtn" onclick="window.scrollTo(0, 0)">↑</button>
+
+  <!-- Visitor Counter -->
+  <div id="visitorCount">Visitors: <span id="count"></span></div>
+
+  <script>
+    // Smooth Scroll for Internal Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Scroll to Top Button Logic
+    window.onscroll = function() {
+      let topButton = document.getElementById('goTopBtn');
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        topButton.style.display = "block";
+      } else {
+        topButton.style.display = "none";
+      }
+    }
+
+    // Dummy Visitor Counter
+    let visitorCount = 145; // Placeholder
+    document.getElementById('count').innerText = visitorCount;
+
+    // Image Animation on Scroll
+    let images = document.querySelectorAll('.image-animate');
+    window.addEventListener('scroll', () => {
+      images.forEach(image => {
+        if (image.getBoundingClientRect().top < window.innerHeight) {
+          image.classList.add('visible');
+        }
+      });
+    });
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+"""
+
+# Write to a text file
+file_path = '/mnt/data/RR_Title_Services_HTML.html'
+with open(file_path, 'w') as file:
+    file.write(html_content)
+
+file_path
